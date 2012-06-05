@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"       
+          "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+  <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.i18n.encoding" value="ISO-8859-1" />
+  <constant name="struts.objectFactory" value="spring" />
+  <constant name="struts.ui.theme" value="simpleconv" />
+  <constant name="struts.custom.i18n.resources" value="global-messages" />
+
+  <!-- timeout de 20 segundos para demostracion 
+  <constant name="com.hexaid.struts2.conversation.expiration.maxInactiveInterval" value="20" />
+  -->
+
+  <!-- timeout por pagina para demostracion
+  <constant name="com.hexaid.struts2.conversation.expiration.policy" value="perview" />
+  -->
+
+  <package name="abstractpackage" extends="conversationPackage" abstract="true">
+    <result-types>
+      <!-- Result type para Tiles con soporte de conversaciones -->
+      <result-type name="tiles"
+        class="com.hexaid.struts2.result.TilesConversationResult" />      
+    </result-types>
+
+    <interceptors>
+      <!-- 
+      JPA specific interceptor stack supporting conversations and bijection.
+      It's a 'paramsPrepareParamsStack' with the addition of conversation and
+      bijection interceptors BEFORE validation and BEFORE params
+      -->
+      <interceptor-stack name="jpaConversationStack">
+        <interceptor-ref name="abstractConversationSupportStack">
+          <param name="exception.logEnabled">true</param>
+          <param name="exception.logLevel">ERROR</param>
+          <param name="exception.logCategory">com.hexaid</param>
+
+          <param name="conversation.persistence">jpa-spring</param>
+        </interceptor-ref>
+      </interceptor-stack>
+    </interceptors>
+
+    <default-interceptor-ref name="jpaConversationStack" />
+
+    <global-results>
+      <result name="session-timeout" type="redirect">
+        <param name="location">/sessionTimeout.jsp</param>
+      </result>
+      <result name="sqlexception">/errorSQLException.jsp</result>
+      <result name="exception" type="tiles">/exception.tiles</result>
+
+      <result name="conversation_not_found" type="redirectAction">
+        <param name="actionName">index</param>
+        <param name="namespace">/</param>
+      </result>
+    </global-results>
+    
+    <global-exception-mappings>
+      <exception-mapping exception="java.sql.SQLException"
+        result="sqlexception" />
+      <exception-mapping exception="org.springframework.dao.DataAccessException"
+        result="sqlexception" />
+      <exception-mapping exception="java.lang.Exception"
+        result="exception" />
+    </global-exception-mappings>
+    
+  </package>
+
+  <package name="publicPackage" extends="abstractpackage" namespace="/">
+
+    <action name="index">
+      <result name="success" type="tiles">/index.tiles</result>
+    </action>
+
+    <action name="login">
+      <result name="success" type="tiles">/login.tiles</result>
+    </action>
+
+    <action name="search_*"
+      class="com.hexaid.examples.hotel.web.action.SearchAction" method="{1}">
+      <result name="success" type="tiles">/search.tiles</result>
+      <result name="success_result" type="tiles">/search_result.tiles
+      </result>
+    </action>
+
+    <action name="viewHotel"
+      class="com.hexaid.examples.hotel.web.action.ViewHotelAction">
+      <result name="success" type="tiles">/viewHotel.tiles</result>
+      <result name="input" type="tiles">/search.tiles</result>
+    </action>
+  </package>
+
+  <package name="protectedPackage" extends="abstractpackage" namespace="/protected">
+
+    <action name="reservaHotel_showForm"
+      class="com.hexaid.examples.hotel.web.action.ReservaHotelAction"
+      method="showForm">
+      <result name="success" type="tiles">
+        <param name="location">/protected/reservaHotel_showForm.tiles</param>
+        <param name="maxInactiveInterval">10</param>
+      </result>
+      <result name="input" type="tiles">/search.tiles</result>
+    </action>
+
+    <action name="reservaHotel_showConfirm"
+      class="com.hexaid.examples.hotel.web.action.ReservaHotelAction"
+      method="showConfirm">
+      <result name="success" type="tiles">
+        <param name="location">/protected/reservaHotel_showConfirm.tiles</param>
+        <param name="maxInactiveInterval">25</param>
+      </result>
+      <result name="input" type="tiles">
+        <param name="location">/protected/reservaHotel_showForm.tiles</param>
+        <param name="maxInactiveInterval">10</param>
+      </result>
+    </action>
+
+    <action name="reservaHotel_confirm"
+      class="com.hexaid.examples.hotel.web.action.ReservaHotelAction"
+      method="confirm">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search_show</param>
+        <param name="namespace">/</param>
+      </result>
+      <result name="input" type="tiles">/protected/reservaHotel_showConfirm.tiles</result>
+    </action>
+
+    <action name="reservaHotel_cancel"
+      class="com.hexaid.examples.hotel.web.action.ReservaHotelAction"
+      method="cancel">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search_show</param>
+        <param name="namespace">/</param>
+      </result>
+    </action>
+
+    <action name="cancelBooking"
+      class="com.hexaid.examples.hotel.web.action.CancelarReservaAction">
+      <result name="success" type="redirectAction">
+        <param name="actionName">search_show</param>
+        <param name="namespace">/</param>
+      </result>
+      <result name="input" type="tiles">/exception.tiles</result>
+    </action>
+  </package>
+
+</struts>
