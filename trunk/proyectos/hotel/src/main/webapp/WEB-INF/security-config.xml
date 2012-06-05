@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+  <security:http auto-config="true">
+    <security:intercept-url pattern="/*action*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <security:intercept-url pattern="/css/**" filters="none"/>
+    <security:intercept-url pattern="/img/**" filters="none"/>
+    <security:intercept-url pattern="/js/**" filters="none"/>
+    <security:intercept-url pattern="/protected/**" access="ROLE_USER" />
+    <security:form-login 
+      login-page="/login.action" 
+      default-target-url="/index.action"
+      authentication-failure-url="/login.action?login_error=1" />
+    <security:logout/>
+    <!-- cookie dura 15 dias -->
+    <security:remember-me token-validity-seconds="1296000"/>
+  </security:http>
+  
+  <security:authentication-manager>
+    <security:authentication-provider>
+      <security:user-service>
+        <security:user name="gbe" password="gbe" authorities="ROLE_USER, ROLE_ADMIN"/>
+        <security:user name="xxx" password="xxx" authorities="ROLE_USER"/>
+      </security:user-service>
+    </security:authentication-provider>
+  </security:authentication-manager>
+
+</beans>

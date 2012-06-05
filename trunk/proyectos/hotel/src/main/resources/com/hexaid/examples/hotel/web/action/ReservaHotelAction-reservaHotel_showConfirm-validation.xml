@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.3//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.3.dtd" >
+<validators>
+  <field name="reserva.checkinDate">
+    <field-validator type="required">
+      <message>La fecha de Ingreso es requerida</message>
+    </field-validator>
+  </field>
+  <field name="reserva.checkoutDate">
+    <field-validator type="required">
+      <message>La fecha de Egreso es requerida</message>
+    </field-validator>
+  </field>
+  <field name="reserva.beds">
+    <field-validator type="required">
+      <message>Debe seleccionar las camas</message>
+    </field-validator>
+  </field>
+  <field name="reserva.smoking">
+    <field-validator type="required">
+      <message>Debe seleccionar si el cuarto es para Fumador o no</message>
+    </field-validator>
+  </field>
+  <field name="reserva.creditCardName">
+    <field-validator type="requiredstring">
+      <message>Debe seleccionar el medio de pago</message>
+    </field-validator>
+  </field>
+  <field name="reserva.creditCard">
+    <field-validator type="requiredstring">
+      <message>El número de tarjeta de crédito es requerido</message>
+    </field-validator>
+    <field-validator type="stringlength">
+      <param name="minLength">14</param>
+      <param name="maxLength">16</param>
+      <message>El número de tarjeta debe tener entre ${minLength} y ${maxLength} dígitos</message>
+    </field-validator>
+    <field-validator type="int">
+      <message>El número de tarjeta debe contener sólo dígitos</message>
+    </field-validator>
+  </field>
+  <field name="reserva.creditCardExpiryMonth">
+    <field-validator type="int">
+      <param name="min">1</param>
+      <param name="max">12</param>
+      <message>El mes debe ser un número entre 1 (Enero) y 12 (Diciembre)</message>
+    </field-validator>
+  </field>
+  <field name="reserva.creditCardExpiryYear">
+    <field-validator type="int">
+      <param name="min">2011</param>
+      <param name="max">2099</param>
+      <message>El año de vencimiento es inválido</message>
+    </field-validator>
+  </field>
+</validators>

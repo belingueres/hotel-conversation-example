@@ -1,0 +1,43 @@
+/*********************/
+/*  CLASES DE TABLAS */
+/*********************/
+
+table.tablaInfo {
+  border: 1px #CCCCCC;
+  width: 100%;
+}
+
+th.sorted a, th.sortable a {
+  background-position: right;
+  display: block;
+  background-repeat: no-repeat;
+}
+th.sortable a {
+  background-image: url(../img/arrow_off.png);
+}
+
+th.sorted {
+  background-color: #AAAAAA;
+}
+
+th.order1 a {
+  background-image: url(../img/arrow_down.png);
+}
+
+th.order2 a {
+  background-image: url(../img/arrow_up.png);
+}
+
+/*************************/
+/*  CLASES DEL FRAMEWORK */
+/*************************/
+
+.actionMessage {
+  color: green;
+  font-size: 11px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 11px;
+}

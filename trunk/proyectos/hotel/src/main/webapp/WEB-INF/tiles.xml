@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/BaseLayout.jsp">
+		<put-attribute name="title" value="" />
+
+		<put-attribute name="header" value="/Header.jsp" />
+		<put-attribute name="menu" value="/Menu.jsp" />
+
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/Footer.jsp" />
+	</definition>
+
+	<definition name="/exception.tiles" extends="baseLayout">
+		<put-attribute name="title" value=" - Ha ocurrido un error" />
+		<put-attribute name="body" value="/exception.jsp" />
+	</definition>
+
+	<definition name="/index.tiles" extends="baseLayout">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/index.jsp" />
+	</definition>
+
+	<definition name="/search.tiles" extends="baseLayout">
+		<put-attribute name="title" value=" - Búsqueda" />
+		<put-attribute name="body" value="/search.jsp" />
+	</definition>
+
+	<definition name="/search_result.tiles" extends="baseLayout">
+		<put-attribute name="title" value=" - Resultados Búsqueda" />
+		<put-attribute name="body" value="/search_result.jsp" />
+	</definition>
+	
+	<definition name="/viewHotel.tiles" extends="baseLayout">
+		<put-attribute name="title" value=" - Detalles del Hotel" />
+		<put-attribute name="body" value="/viewHotel.jsp" />
+	</definition>
+
+  <definition name="/login.tiles" extends="baseLayout">
+    <put-attribute name="title" value=" - Ingreso" />
+    <put-attribute name="body" value="/login.jsp" />
+  </definition>
+
+  <definition name="/protected/reservaHotel_showForm.tiles" extends="baseLayout">
+    <put-attribute name="title" value=" - Paso 1 - Ingrese los datos de su reserva" />
+    <put-attribute name="body" value="/protected/reservaHotel_showForm.jsp" />
+  </definition>
+
+  <definition name="/protected/reservaHotel_showConfirm.tiles" extends="baseLayout">
+    <put-attribute name="title" value=" - Paso 2 - Confirme los datos de su reserva" />
+    <put-attribute name="body" value="/protected/reservaHotel_showConfirm.jsp" />
+  </definition>
+
+</tiles-definitions>
