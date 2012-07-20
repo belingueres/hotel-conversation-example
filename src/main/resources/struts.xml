@@ -90,6 +90,10 @@
       <result name="success" type="tiles">/viewHotel.tiles</result>
       <result name="input" type="tiles">/search.tiles</result>
     </action>
+    
+    <action name="infoAutor">
+      <result type="tiles">/infoAutor.tiles</result>
+    </action>
   </package>
 
   <package name="protectedPackage" extends="abstractpackage" namespace="/protected">
