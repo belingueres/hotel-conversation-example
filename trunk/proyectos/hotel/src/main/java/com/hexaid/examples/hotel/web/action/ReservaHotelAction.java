@@ -17,7 +17,7 @@ import com.hexaid.examples.hotel.service.BookingService;
 import com.hexaid.examples.hotel.service.HotelService;
 import com.hexaid.examples.hotel.service.UserService;
 import com.hexaid.struts2.annotations.Begin;
-import com.hexaid.struts2.annotations.ConversationControl;
+import com.hexaid.struts2.annotations.ConversationAttribute;
 import com.hexaid.struts2.annotations.End;
 import com.hexaid.struts2.annotations.In;
 import com.hexaid.struts2.annotations.Out;
@@ -111,12 +111,12 @@ public class ReservaHotelAction extends ActionSupport implements PrincipalAware 
 		//TODO: Validar tarjeta de crédito
 	}
 
-	@ConversationControl(ConversationAttributeType.MANDATORY)
+	@ConversationAttribute(ConversationAttributeType.MANDATORY)
 	public String showConfirm() {
 		return SUCCESS;
 	}
 
-	@ConversationControl(ConversationAttributeType.MANDATORY)
+	@ConversationAttribute(ConversationAttributeType.MANDATORY)
 	@End
 	public String confirm() {
 		// salva la reserva en la base de datos
@@ -134,7 +134,7 @@ public class ReservaHotelAction extends ActionSupport implements PrincipalAware 
 		return SUCCESS;
 	}
 	
-	@ConversationControl(ConversationAttributeType.MANDATORY)
+	@ConversationAttribute(ConversationAttributeType.MANDATORY)
 	@End(beforeRedirect=true, commit=false)
 	public String cancel() {
 		return SUCCESS;

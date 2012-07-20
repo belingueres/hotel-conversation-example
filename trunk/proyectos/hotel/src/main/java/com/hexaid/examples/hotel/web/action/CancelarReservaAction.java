@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.hexaid.examples.hotel.domain.Booking;
 import com.hexaid.examples.hotel.service.BookingService;
 import com.hexaid.struts2.annotations.Begin;
-import com.hexaid.struts2.annotations.ConversationControl;
+import com.hexaid.struts2.annotations.ConversationAttribute;
 import com.hexaid.struts2.annotations.End;
 import com.hexaid.struts2.common.ConversationAttributeType;
 import com.opensymphony.xwork2.ActionSupport;
@@ -37,7 +37,7 @@ public class CancelarReservaAction extends ActionSupport {
 	@Override
 	@Begin
 	@End 
-	@ConversationControl(ConversationAttributeType.REQUIRES_NEW)
+	@ConversationAttribute(ConversationAttributeType.REQUIRES_NEW)
 	public String execute() throws Exception {
 		final Booking booking = bookingService.getBookingById(bookingId);
 		if (booking == null) {
