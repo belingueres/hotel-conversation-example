@@ -43,6 +43,12 @@
     <put-attribute name="title" value=" - Ingreso" />
     <put-attribute name="body" value="/login.jsp" />
   </definition>
+  
+  <definition name="/infoAutor.tiles" extends="baseLayout">
+    <put-attribute name="title" value=" - Información sobre la Tesina y su Autor" />
+    <put-attribute name="menu" value="/fotoAutor.jsp" />
+    <put-attribute name="body" value="/infoAutor.jsp" />
+  </definition>
 
   <definition name="/protected/reservaHotel_showForm.tiles" extends="baseLayout">
     <put-attribute name="title" value=" - Paso 1 - Ingrese los datos de su reserva" />

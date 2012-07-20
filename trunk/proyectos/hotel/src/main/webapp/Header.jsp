@@ -15,7 +15,8 @@
 			<div class="grid_12">
 				<ul class="nav main">
 					<li>
-						<a href="#">Tesina / Autor</a>
+<s:url var="autorUrl" includeContext="true" includeParams="none" namespace="/" action="infoAutor" />
+						<a href="${autorUrl}">Tesina / Autor</a>
 					</li>
 					<li class="secondary">
 <c:choose>
