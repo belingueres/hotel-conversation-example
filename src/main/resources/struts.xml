@@ -45,10 +45,6 @@
     <default-interceptor-ref name="jpaConversationStack" />
 
     <global-results>
-      <result name="session-timeout" type="redirect">
-        <param name="location">/sessionTimeout.jsp</param>
-      </result>
-      <result name="sqlexception">/errorSQLException.jsp</result>
       <result name="exception" type="tiles">/exception.tiles</result>
 
       <result name="conversation_not_found" type="redirectAction">
@@ -58,12 +54,7 @@
     </global-results>
     
     <global-exception-mappings>
-      <exception-mapping exception="java.sql.SQLException"
-        result="sqlexception" />
-      <exception-mapping exception="org.springframework.dao.DataAccessException"
-        result="sqlexception" />
-      <exception-mapping exception="java.lang.Exception"
-        result="exception" />
+      <exception-mapping exception="java.lang.Exception" result="exception" />
     </global-exception-mappings>
     
   </package>
