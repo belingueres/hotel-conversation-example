@@ -14,7 +14,7 @@
           <div class="block" id="login-forms">
 <c:if test="${not empty param.login_error}">
   <div class="errorMessage">
-    Su intento de ingreso no fue exisoto, intente nuevamente.<br />
+    Su intento de ingreso no fue exitoso, intente nuevamente.<br />
     Razón:
     <s:set var="AUTHENTICATION_EXCEPTION_KEY" scope="page" value="@org.springframework.security.web.WebAttributes@AUTHENTICATION_EXCEPTION"/>
     <s:text name="%{#attr.AUTHENTICATION_EXCEPTION_KEY}" />
