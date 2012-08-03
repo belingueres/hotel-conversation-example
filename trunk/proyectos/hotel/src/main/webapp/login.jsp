@@ -44,9 +44,13 @@
             </form>
             <form action="">
               <fieldset>
-                <legend>Registrarse</legend>
-                <p>Si todavía no posee una cuenta, por favor cree una nueva para registrarse.</p>
-                <input type="submit" value="Crear Cuenta" />
+                <legend>Usuarios de prueba</legend>
+                <p>Ingrese al sistema con alguno de los siguientes usuario/contraseña:</p>
+                <p class="notice">
+                javier/javier<br/>
+                claudia/claudia<br/>
+                gabriel/gabriel<br/>
+                </p>
               </fieldset>
             </form>
 
