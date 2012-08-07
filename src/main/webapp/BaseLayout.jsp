@@ -19,6 +19,7 @@ response.addDateHeader("Expires", 1);
 		<!--[if IE 6]><link rel="stylesheet" type="text/css" href="<s:url includeContext="true" includeParams="none" namespace="/" value="/css/ie6.css" />" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<s:url includeContext="true" includeParams="none" namespace="/" value="/css/ie.css" />" media="screen" /><![endif]-->
 		<link rel="stylesheet" type="text/css" href="<s:url includeContext="true" includeParams="none" namespace="/" value="/css/hotel.css" />" media="screen" />
+    <link rel="icon" type="image/x-icon" href="http://www.info.unlp.edu.ar/images/frontend/favicon.ico" />
 	</head>
 	<body>
 		<div class="container_12">
