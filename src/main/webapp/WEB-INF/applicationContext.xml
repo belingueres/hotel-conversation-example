@@ -35,21 +35,24 @@
   </bean>
  
    <!-- Creates a EntityManagerFactory for use with the Hibernate JPA provider and a simple in-memory data source populated with test data -->
-   <bean id="entityManagerFactory"
-       class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-       <property name="dataSource" ref="dataSource" />
-       <property name="jpaVendorAdapter">
-           <bean
-               class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-               <!-- comentado pero posiblemente haya que agregarlo
-               <property name="sessionFactoryName" value="mySessionFactory" />
-               -->
-               <property name="database" value="HSQL" />
-               <property name="showSql" value="true" />
-           </bean>
-       </property>
-   </bean>
-
+  <bean id="entityManagerFactory"
+    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="jpaVendorAdapter">
+      <bean
+        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="database" value="HSQL" />
+        <property name="showSql" value="true" />
+      </bean>
+    </property>
+    <!-- not possible with Tomcat (JNDI is read-only)
+    <property name="jpaProperties">
+      <value>
+        hibernate.session_factory_name=mySessionFactory
+      </value>
+    </property>
+    -->
+  </bean>
 
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -71,6 +74,9 @@
 
   <!-- Spring security -->
   <import resource="security-config.xml"/>
+  
+  <!-- JSR 303 Validation -->
+  <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
   <!--  CONSTANTES  -->
   

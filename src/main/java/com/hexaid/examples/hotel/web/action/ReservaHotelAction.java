@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.apache.struts2.interceptor.PrincipalAware;
 import org.apache.struts2.interceptor.PrincipalProxy;
@@ -30,9 +34,9 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class ReservaHotelAction extends ActionSupport implements PrincipalAware {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// servicios
+    // servicios
 	@Autowired
 	private HotelService hotelService;
 	
@@ -41,6 +45,9 @@ public class ReservaHotelAction extends ActionSupport implements PrincipalAware 
 	
 	@Autowired
 	private BookingService bookingService;
+	
+	@Autowired
+	private Validator validator;
 
 	// valores inyectados
 	private PrincipalProxy principalProxy;
@@ -95,6 +102,12 @@ public class ReservaHotelAction extends ActionSupport implements PrincipalAware 
 	}
 
 	public void validateShowConfirm() {
+        Set<ConstraintViolation<Booking>> validation = validator.validate(reserva);
+        for(ConstraintViolation<Booking> error : validation) {
+            String fieldName = "reserva." + error.getPropertyPath().toString();
+            addFieldError(fieldName, error.getMessage());
+        }
+	    
 		// validar fecha de expiración tarjeta
 		final Calendar calendar = Calendar.getInstance();
 		// mes con base 1 (1 a 12)
