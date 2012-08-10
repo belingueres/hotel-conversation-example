@@ -20,7 +20,7 @@
     <s:text name="%{#attr.AUTHENTICATION_EXCEPTION_KEY}" />
   </div>
 </c:if>
-            <form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+            <form name="login" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
               <fieldset class="login">
                 <legend>Ingreso</legend>
                 <p class="notice">Ingrese para completar su reserva.</p>
@@ -56,3 +56,6 @@
 
           </div>
         </div>
+<script type="text/javascript">
+document.forms['login'].j_username.focus();
+</script>
