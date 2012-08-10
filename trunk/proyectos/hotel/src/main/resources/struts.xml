@@ -8,7 +8,7 @@
   <constant name="struts.i18n.encoding" value="ISO-8859-1" />
   <constant name="struts.objectFactory" value="spring" />
   <constant name="struts.ui.theme" value="simpleconv" />
-  <constant name="struts.custom.i18n.resources" value="global-messages" />
+  <constant name="struts.custom.i18n.resources" value="ValidationMessages" />
 
   <!-- timeout de 20 segundos para demostracion 
   <constant name="com.hexaid.struts2.conversation.expiration.maxInactiveInterval" value="20" />
