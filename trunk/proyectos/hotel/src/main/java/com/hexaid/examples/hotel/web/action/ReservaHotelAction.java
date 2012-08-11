@@ -5,14 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 
 import org.apache.struts2.interceptor.PrincipalAware;
 import org.apache.struts2.interceptor.PrincipalProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
 
 import com.hexaid.examples.hotel.domain.Booking;
 import com.hexaid.examples.hotel.domain.Hotel;
@@ -102,11 +102,19 @@ public class ReservaHotelAction extends ActionSupport implements PrincipalAware 
 	}
 
 	public void validateShowConfirm() {
-        Set<ConstraintViolation<Booking>> validation = validator.validate(reserva);
-        for(ConstraintViolation<Booking> error : validation) {
-            String fieldName = "reserva." + error.getPropertyPath().toString();
-            addFieldError(fieldName, error.getMessage());
-        }
+	    DataBinder binder = new DataBinder(reserva, "reserva");
+	    binder.setValidator(validator);
+	    // validate the target object
+	    binder.validate();
+
+	    // get BindingResult that includes any validation errors
+	    BindingResult results = binder.getBindingResult();
+	    for(FieldError error : results.getFieldErrors()) {
+	        String fieldName = "reserva." + error.getField();
+	        String messageCode = reserva.getClass().getSimpleName().toLowerCase() + '.' + error.getField() + '.' + error.getCode();
+            String message = getText(messageCode);
+            addFieldError(fieldName, message);
+	    }
 	    
 		// validar fecha de expiración tarjeta
 		final Calendar calendar = Calendar.getInstance();
