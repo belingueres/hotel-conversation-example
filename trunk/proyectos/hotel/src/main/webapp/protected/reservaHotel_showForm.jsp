@@ -23,6 +23,7 @@
 
 <div class="grid_5">
   <sconv:form action="reservaHotel_showConfirm" namespace="/protected" includeContext="true" method="POST">
+    <s:actionerror/>
 		<fieldset>
 		    <s:fielderror fieldName="reserva.checkinDate" />
 			<legend>Reservar Hotel</legend>

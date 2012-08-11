@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 import com.hexaid.examples.hotel.domain.Booking;
@@ -109,11 +110,18 @@ public class ReservaHotelAction extends ActionSupport implements PrincipalAware 
 
 	    // get BindingResult that includes any validation errors
 	    BindingResult results = binder.getBindingResult();
-	    for(FieldError error : results.getFieldErrors()) {
-	        String fieldName = "reserva." + error.getField();
-	        String messageCode = reserva.getClass().getSimpleName().toLowerCase() + '.' + error.getField() + '.' + error.getCode();
-            String message = getText(messageCode);
-            addFieldError(fieldName, message);
+	    for(ObjectError error : results.getAllErrors()) {
+	        if (error instanceof FieldError) {
+	            FieldError fieldError = (FieldError) error;
+    	        String fieldName = "reserva." + fieldError.getField();
+    	        String messageCode = reserva.getClass().getSimpleName().toLowerCase() + '.' + fieldError.getField() + '.' + error.getCode();
+                String message = getText(messageCode);
+                addFieldError(fieldName, message);
+	        }
+	        else {
+                String message = getText(error.getCode());
+                addActionError(message);
+	        }
 	    }
 	    
 		// validar fecha de expiración tarjeta
