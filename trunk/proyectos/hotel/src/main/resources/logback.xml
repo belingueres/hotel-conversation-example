@@ -25,11 +25,11 @@
       <pattern>%d{dd/MM/yyyy HH:mm:ss} %5p %C:%L - %msg%n</pattern>
     </encoder>
   </appender>
-  <logger name="com.hexaid" level="INFO"/>
+  <logger name="com.hexaid" level="DEBUG"/>
   <logger name="org.springframework" level="INFO"/>
   <!-- STRUTS 2.2.x PARA QUE NO TIRE WARNINGS DE VARIABLES QUE NO ENCUENTRA, PONER EN ERROR o FATAL -->
   <logger name="com.opensymphony.xwork2.ognl" level="ERROR"/>
   <root level="WARN">
-    <appender-ref ref="archivo"/>
+    <appender-ref ref="consola"/>
   </root>
 </configuration>
