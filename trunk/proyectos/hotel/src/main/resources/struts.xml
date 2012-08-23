@@ -28,7 +28,7 @@
     <interceptors>
       <!-- 
       JPA specific interceptor stack supporting conversations and bijection.
-      It's a 'paramsPrepareParamsStack' with the addition of conversation and
+      It is a paramsPrepareParamsStack with the addition of conversation and
       bijection interceptors BEFORE validation and BEFORE params
       -->
       <interceptor-stack name="jpaConversationStack">
