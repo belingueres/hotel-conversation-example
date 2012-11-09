@@ -9,12 +9,8 @@
                 <td>Una Solución para el Soporte de Conversaciones en Aplicaciones Web Java</td>
               </tr>
               <tr>
-                <th>Director</th>
-                <td>Lic. Javier Díaz</td>
-              </tr>
-              <tr>
-                <th>Codirector</th>
-                <td>Lic. Claudia Queiruga</td>
+                <th>Directores</th>
+                <td>Lic. Javier Díaz, Lic. Claudia Queiruga</td>
               </tr>
               <tr>
                 <th>Carrera</th>
